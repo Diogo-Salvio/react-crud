@@ -26,6 +26,8 @@ const CreateCardModal = ({
         } else {
             setTasks([card])
         }
+        setCard({title:"", date:"", description: ""})
+        setModalState(false)
     }
 
     return (
