@@ -5,16 +5,29 @@ const CreateCardModal = ({
     modalState,
     setModalState,
     card,
-    setCard
+    setCard,
+    tasks,
+    setTasks
 }) => {
 
     useEffect(() => {
         console.log(card);
-    }, [card]);
+        console.log(tasks)
+    }, [card, tasks]);
 
     const handleChange = (event) => {
         setCard({ ...card, [event.target.name]: event.target.value })
     }
+
+    const createCard = () => {
+        //Por algum motivo o state tasks estava chegando como undefined ou null, então para isso foi necessário fazer essa verificação.
+        if (Array.isArray(tasks)) {
+            setTasks([...tasks, card])
+        } else {
+            setTasks([card])
+        }
+    }
+
     return (
         //Validação para verificar se o modal foi clicado
         modalState ?
@@ -31,7 +44,7 @@ const CreateCardModal = ({
                     </div>
                     <p>Descrição</p>
                     <textarea name="description" cols="30" rows="10" onChange={handleChange} value={card.description}></textarea>
-                    <button >Criar Tarefa</button>
+                    <button onClick={createCard}>Criar Tarefa</button>
                 </div>
             </div>
             : ""

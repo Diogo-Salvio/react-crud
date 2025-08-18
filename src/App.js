@@ -7,6 +7,7 @@ function App() {
 
   const [tasks, setTasks] = useState([])
   const [finishTasks, setFinishTasks] = useState([])
+
   const [card, setCard] = useState({title:"", date:"", description: ""})
 
 
@@ -16,6 +17,8 @@ function App() {
       <Header
         card={card}
         setCard={setCard}
+        tasks={tasks}
+        setTasks={setTasks}
         />
       <ContainerCards containerName={'Tarefas Pendentes'} />
       <ContainerCards containerName={'Tarefas Concluidas'} />
