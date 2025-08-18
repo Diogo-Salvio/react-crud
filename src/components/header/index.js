@@ -6,7 +6,6 @@ const Header = ({card, setCard, tasks, setTasks}) => {
 
     const [open, setOpen] = useState(false)
 
-
     return (
         <header className='header'>
             <h1>Crud Organizador de tarefas</h1>

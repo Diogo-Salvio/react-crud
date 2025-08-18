@@ -1,7 +1,6 @@
 import './card.css';
 //import { useEffect } from 'react';
 
-
 const Card = ({ 
     taskTitle, 
     taskDate, 
@@ -14,10 +13,7 @@ const Card = ({
     checkBoxState
 }) => {
 
-
-
-
-    const handleChange = (event) => {
+    const handleChange = (event) => { //Função para movimentar a tarefa entre os states
         if (event.target.checked === true) {
             const taskToMove = tasks.find(task => task.key === id)//Encontra a tarefa que precisa ser movida
             setTasks(prev => prev.filter(task => task.key !== id))//Remove a tarefa do state tasks
