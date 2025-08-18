@@ -18,16 +18,22 @@ const CreateCardModal = ({
     const handleChange = (event) => {
         setCard({ ...card, [event.target.name]: event.target.value })
     }
+    function getRandomInt(min, max) {
+        min = Math.ceil(min); //Aproxima para cima
+        max = Math.floor(max); // Aproxima para baixo
+        return Math.floor(Math.random() * (max - min) + min); //Gera o valor entre o intevalo definido
+    }
+
 
     const createCard = () => {
-
+        const newCard = { ...card, key: getRandomInt(1, 1000) }
         //Por algum motivo o state tasks estava chegando como undefined ou null, então para isso foi necessário fazer essa verificação.
         if (Array.isArray(tasks)) {
-            setTasks([...tasks, card])
+            setTasks([...tasks, newCard])
         } else {
-            setTasks([card])
+            setTasks([newCard])
         }
-        setCard({title:"", date:"", description: ""})
+        setCard({ title: "", date: "", description: "" })
         setModalState(false)
     }
 

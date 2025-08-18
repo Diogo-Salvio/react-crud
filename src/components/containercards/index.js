@@ -11,6 +11,7 @@ const ContainerCards = ({containerName, tasks}) => {
                     taskTitle={task.title}
                     taskDate={task.date}
                     taskDescription={task.description} 
+                    key={task.key}
                     />
                 ): ""}
             </div>

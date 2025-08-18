@@ -5,10 +5,10 @@ import Header from './components/header';
 
 function App() {
 
-  const [tasks, setTasks] = useState([{title:"1", date:"22/04/2002", description: "Vem pro Fut"}])
+  const [tasks, setTasks] = useState([{title:"1", date:"2002-04-22", description: "Vem pro Fut", key: 1}])
   //const [finishTasks, setFinishTasks] = useState([])
 
-  const [card, setCard] = useState({title:"", date:"", description: ""})
+  const [card, setCard] = useState({title:"", date:"", description: "", key: 0})
 
 
   return (
