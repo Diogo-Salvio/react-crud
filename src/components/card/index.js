@@ -1,8 +1,23 @@
 import './card.css';
 
 
+const Card = ({taskTitle, taskDate, taskDescription, tasks, setTasks, finishTasks, setFinishTasks, id}) => {
 
-const Card = ({taskTitle, taskDate, taskDescription}) => {
+    const moveToFinishTasks = (k) => {
+        const indextomove = tasks.findIndex(task => task.key === k);
+        if (indextomove !== -1) {
+            setTasks() //Remover daqui
+            setFinishTasks() //Adicionar aqui
+        }
+    }
+
+    const moveToPendingTasks = (k) => {
+        const indextomove = finishTasks.findIndex(finishTasks => finishTasks.key === k);
+        if (indextomove !== -1) {
+            setFinishTasks() //Remover daqui
+            setTasks() //Adicionar aqui
+        }
+    }
     
     return (
         <div className='card'>
@@ -13,10 +28,10 @@ const Card = ({taskTitle, taskDate, taskDescription}) => {
             <button>Copiar Tarefa</button>
             <button>Excluir Tarefa</button>
             <button>Editar Tarefa</button>
-            <label>Finalizar Tarefa: <input type='checkbox' /></label>
+            <label>Finalizar Tarefa: <input type='checkbox' onChange={moveToFinishTasks(id)}/></label>
         </div>
     )
-}
+    }
 
 
 export default Card

@@ -5,10 +5,14 @@ import Header from './components/header';
 
 function App() {
 
-  const [tasks, setTasks] = useState([{title:"1", date:"2002-04-22", description: "Vem pro Fut", key: 1}])
-  //const [finishTasks, setFinishTasks] = useState([])
+  const [tasks, setTasks] = useState([
+    { title: "1", date: "2002-04-22", description: "1 da 1 de 1", key: 1 },
+    { title: "2", date: "2002-05-22", description: "2 da 2 de 2", key: 2 }
+  ])
 
-  const [card, setCard] = useState({title:"", date:"", description: "", key: 0})
+  const [finishTasks, setFinishTasks] = useState([{ title: "3", date: "2002-05-22", description: "3 da 3 de 3", key: 3 }])
+
+  const [card, setCard] = useState({ title: "", date: "", description: "", key: 0 })
 
 
   return (
@@ -18,9 +22,23 @@ function App() {
         setCard={setCard}
         tasks={tasks}
         setTasks={setTasks}
-        />
-      <ContainerCards tasks={tasks} containerName={'Tarefas Pendentes'} />
-      <ContainerCards containerName={'Tarefas Concluidas'} />
+      />
+      <ContainerCards
+        containerName={'Tarefas Pendentes'}
+        tasks={tasks}
+        setTasks={setTasks}
+        finishTasks={finishTasks}
+        setFinishTasks={setFinishTasks}
+        arrayToBeRender={tasks}
+      />
+      <ContainerCards
+        containerName={'Tarefas Concluidas'}
+        tasks={tasks}
+        setTasks={setTasks}
+        finishTasks={finishTasks}
+        setFinishTasks={setFinishTasks}
+        arrayToBeRender={finishTasks}
+      />
     </div>
   );
 }
