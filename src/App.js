@@ -5,11 +5,10 @@ import Header from './components/header';
 
 function App() {
 
-  const [tasks, setTasks] = useState([])
-  const [finishTasks, setFinishTasks] = useState([])
+  const [tasks, setTasks] = useState([{title:"1", date:"22/04/2002", description: "Vem pro Fut"}])
+  //const [finishTasks, setFinishTasks] = useState([])
 
   const [card, setCard] = useState({title:"", date:"", description: ""})
-
 
 
   return (
@@ -20,7 +19,7 @@ function App() {
         tasks={tasks}
         setTasks={setTasks}
         />
-      <ContainerCards containerName={'Tarefas Pendentes'} />
+      <ContainerCards tasks={tasks} containerName={'Tarefas Pendentes'} />
       <ContainerCards containerName={'Tarefas Concluidas'} />
     </div>
   );

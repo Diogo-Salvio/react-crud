@@ -20,6 +20,7 @@ const CreateCardModal = ({
     }
 
     const createCard = () => {
+
         //Por algum motivo o state tasks estava chegando como undefined ou null, então para isso foi necessário fazer essa verificação.
         if (Array.isArray(tasks)) {
             setTasks([...tasks, card])
