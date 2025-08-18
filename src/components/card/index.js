@@ -1,9 +1,18 @@
-import { useState } from 'react';
 import './card.css';
 //import { useEffect } from 'react';
 
 
-const Card = ({ taskTitle, taskDate, taskDescription, tasks, setTasks, finishTasks, setFinishTasks, id, checkBoxState}) => {
+const Card = ({ 
+    taskTitle, 
+    taskDate, 
+    taskDescription, 
+    tasks, 
+    setTasks, 
+    finishTasks, 
+    setFinishTasks, 
+    id, 
+    checkBoxState
+}) => {
 
 
 
@@ -21,6 +30,15 @@ const Card = ({ taskTitle, taskDate, taskDescription, tasks, setTasks, finishTas
         
     }
 
+    const removeTaks = () => {
+
+        if (tasks.find(task => task.key === id) !== undefined) {
+            setTasks(prev => prev.filter(task => task.key !== id))
+        } else {
+            setFinishTasks(prev => prev.filter(task => task.key !== id))
+        }
+    }
+
 
     return (
         <div className='card'>
@@ -29,7 +47,7 @@ const Card = ({ taskTitle, taskDate, taskDescription, tasks, setTasks, finishTas
             <input type='date' readOnly={true} value={taskDate} />
             <p>{taskDescription}</p>
             <button>Copiar Tarefa</button>
-            <button>Excluir Tarefa</button>
+            <button onClick={removeTaks}>Excluir Tarefa</button>
             <button>Editar Tarefa</button>
             <label>Finalizar Tarefa:
                 <input type='checkbox'
