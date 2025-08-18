@@ -2,7 +2,7 @@ import CreateCardModal from '../createcardmodal/createcard'
 import { useState } from 'react'
 import './Header.css'
 
-const Header = () => {
+const Header = ({card, setCard}) => {
 
     const [open, setOpen] = useState(false)
 
@@ -14,6 +14,8 @@ const Header = () => {
             <CreateCardModal 
             modalState={open} 
             setModalState={setOpen}
+            card={card}
+            setCard={setCard}
             />
         </header>
     )
