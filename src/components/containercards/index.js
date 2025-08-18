@@ -1,7 +1,17 @@
 import './Containercard.css'
 import Card from '../card'
+import { useEffect } from 'react'
+
+
+
 
 const ContainerCards = ({ containerName, tasks, setTasks, finishTasks, setFinishTasks, arrayToBeRender }) => {
+
+    useEffect(() => {
+        console.log(tasks)
+        console.log(finishTasks)
+    }, [tasks, finishTasks])
+
     return (
         <div className='containerCards'>
             <h2>{containerName}</h2>
@@ -17,6 +27,7 @@ const ContainerCards = ({ containerName, tasks, setTasks, finishTasks, setFinish
                         finishTasks={finishTasks}
                         setFinishTasks={setFinishTasks}
                         id={task.key}
+                        checkBoxState={arrayToBeRender === tasks ? false : true}
                     />
                 ) : ""}
             </div>

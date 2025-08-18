@@ -1,37 +1,45 @@
+import { useState } from 'react';
 import './card.css';
+//import { useEffect } from 'react';
 
 
-const Card = ({taskTitle, taskDate, taskDescription, tasks, setTasks, finishTasks, setFinishTasks, id}) => {
+const Card = ({ taskTitle, taskDate, taskDescription, tasks, setTasks, finishTasks, setFinishTasks, id, checkBoxState}) => {
 
-    const moveToFinishTasks = (k) => {
-        const indextomove = tasks.findIndex(task => task.key === k);
-        if (indextomove !== -1) {
-            setTasks() //Remover daqui
-            setFinishTasks() //Adicionar aqui
-        }
+
+
+
+    const handleChange = (event) => {
+        if (event.target.checked === true) {
+            const taskToMove = tasks.find(task => task.key === id)//Encontra a tarefa que precisa ser movida
+            setTasks(prev => prev.filter(task => task.key !== id))//Remove a tarefa do state tasks
+            setFinishTasks(prev => [...prev, taskToMove])//Adiciona a tarefa no state finishtasks
+         } else {
+            const taskToMove = finishTasks.find(task => task.key === id)//Encontra a tarefa que precisa ser movida
+            setFinishTasks(prev => prev.filter(task => task.key !== id))//Remove a tarefa do state finishTasks
+            setTasks(prev => [...prev, taskToMove])//Adiciona a tarefa no state tasks
+        } 
+        
     }
 
-    const moveToPendingTasks = (k) => {
-        const indextomove = finishTasks.findIndex(finishTasks => finishTasks.key === k);
-        if (indextomove !== -1) {
-            setFinishTasks() //Remover daqui
-            setTasks() //Adicionar aqui
-        }
-    }
-    
+
     return (
         <div className='card'>
             <h3>{taskTitle}</h3>
             <span>Data da Tarefa:</span>
-            <input type='date' readOnly={true} value={taskDate}/>
+            <input type='date' readOnly={true} value={taskDate} />
             <p>{taskDescription}</p>
             <button>Copiar Tarefa</button>
             <button>Excluir Tarefa</button>
             <button>Editar Tarefa</button>
-            <label>Finalizar Tarefa: <input type='checkbox' onChange={moveToFinishTasks(id)}/></label>
+            <label>Finalizar Tarefa:
+                <input type='checkbox'
+                    onChange={handleChange}
+                    checked={checkBoxState}
+                />
+            </label>
         </div>
     )
-    }
+}
 
 
 export default Card

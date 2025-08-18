@@ -1,5 +1,4 @@
 import './createcard.css'
-import { useEffect } from 'react';
 
 const CreateCardModal = ({
     modalState,
@@ -10,23 +9,13 @@ const CreateCardModal = ({
     setTasks
 }) => {
 
-    useEffect(() => {
-        console.log(card);
-        console.log(tasks)
-    }, [card, tasks]);
 
     const handleChange = (event) => {
         setCard({ ...card, [event.target.name]: event.target.value })
     }
-    function getRandomInt(min, max) {
-        min = Math.ceil(min); //Aproxima para cima
-        max = Math.floor(max); // Aproxima para baixo
-        return Math.floor(Math.random() * (max - min) + min); //Gera o valor entre o intevalo definido
-    }
-
 
     const createCard = () => {
-        const newCard = { ...card, key: getRandomInt(1, 1000) }
+        const newCard = { ...card, key: Date.now() }
         //Por algum motivo o state tasks estava chegando como undefined ou null, então para isso foi necessário fazer essa verificação.
         if (Array.isArray(tasks)) {
             setTasks([...tasks, newCard])
