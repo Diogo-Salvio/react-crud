@@ -1,4 +1,5 @@
 import './card.css';
+import { useState } from 'react';
 //import { useEffect } from 'react';
 
 const Card = ({ 
@@ -23,11 +24,9 @@ const Card = ({
             setFinishTasks(prev => prev.filter(task => task.key !== id))//Remove a tarefa do state finishTasks
             setTasks(prev => [...prev, taskToMove])//Adiciona a tarefa no state tasks
         } 
-        
     }
 
     const removeTaks = () => {
-
         if (tasks.find(task => task.key === id) !== undefined) {
             setTasks(prev => prev.filter(task => task.key !== id))
         } else {
@@ -35,6 +34,11 @@ const Card = ({
         }
     }
 
+    //CARD DE EDIÇÃO DE TAREFA
+
+    const [editModalState, setEditModalState] = useState(false)
+
+    //CARD DE EDIÇÃO DE TAREFA
 
     return (
         <div className='card'>
