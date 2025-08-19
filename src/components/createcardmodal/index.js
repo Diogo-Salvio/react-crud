@@ -1,4 +1,6 @@
+import { useEffect } from 'react'
 import './createcard.css'
+
 
 const CreateCardModal = ({
     modalState,
@@ -9,23 +11,38 @@ const CreateCardModal = ({
     setTasks
 }) => {
 
+    useEffect(() => {
+        console.log(card)
+    })
+
 
     const handleChange = (event) => {
         setCard({ ...card, [event.target.name]: event.target.value })
     }
 
     const createCard = () => {
-        const newCard = { ...card, key: Date.now() }
-        //Por algum motivo o state tasks estava chegando como undefined ou null, então para isso foi necessário fazer essa verificação.
-        if (Array.isArray(tasks)) {
-            setTasks([...tasks, newCard])
-        } else {
-            setTasks([newCard])
-        }
-        setCard({ title: "", date: "", description: "" })
-        setModalState(false)
-    }
 
+        const cardKeys = Object.values(card)
+
+
+        if (cardKeys[0].length === 0) {
+            alert('A tarefa precisa de um titulo!')
+        } else if (cardKeys[2].length === 0) {
+            alert('A tarefa precisa de uma descrição')
+        } else if (cardKeys[1].length !== 10) {
+            alert('Adicione uma data valida')
+        } else {
+            const newCard = { ...card, key: Date.now() }
+            //Por algum motivo o state tasks estava chegando como undefined ou null, então para isso foi necessário fazer essa verificação.
+            if (Array.isArray(tasks)) {
+                setTasks([...tasks, newCard])
+            } else {
+                setTasks([newCard])
+            }
+            setCard({ title: "", date: "", description: "" })
+            setModalState(false)
+        }
+    }
     return (
         //Validação para verificar se o modal foi clicado
         modalState ?

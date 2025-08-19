@@ -1,4 +1,4 @@
-import CreateCardModal from '../createcardmodal/createcard'
+import CreateCardModal from '../createcardmodal'
 import { useState } from 'react'
 import './Header.css'
 
