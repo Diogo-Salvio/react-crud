@@ -34,9 +34,9 @@ const EditCardModal = ({
 
     const handleChange = (event) => {
         if (taskToEdit) {
-            setTasks((prev) => prev.map((task) => task.key === id ? {...task, [event.target.name]: event.target.value} : ""))
+            setTasks((prev) => prev.map((task) => task.key === id ? {...task, [event.target.name]: event.target.value} : task))
         } else {
-            setFinishTasks((prev) => prev.map((task) => task.key === id ? {...task, [event.target.name]: event.target.value} : ""))
+            setFinishTasks((prev) => prev.map((task) => task.key === id ? {...task, [event.target.name]: event.target.value} : task))
         }
     }
 
