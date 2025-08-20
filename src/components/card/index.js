@@ -27,12 +27,26 @@ const Card = ({
         }
     }
 
-    const removeTaks = () => {
+    const removeTaks = () => { //Função para excluir uma tarefa
         if (tasks.find(task => task.key === id) !== undefined) {
             setTasks(prev => prev.filter(task => task.key !== id))
         } else {
             setFinishTasks(prev => prev.filter(task => task.key !== id))
         }
+    }
+
+    //Função para copiar a task
+
+    const [copied, setCopied] = useState(false);
+
+    const copyTask = () => {
+        const taskResume = `(${taskTitle}) para a data (${taskDate}) com a descrição ${taskDescription}`
+        navigator.clipboard.writeText(taskResume)
+        setCopied(true);
+
+        setTimeout(() => {
+            setCopied(false);
+        }, 3000)
     }
 
     //CARD DE EDIÇÃO DE TAREFA
@@ -47,7 +61,7 @@ const Card = ({
             <span>Data da Tarefa:</span>
             <input type='date' readOnly={true} value={taskDate} />
             <p>{taskDescription}</p>
-            <button>Copiar Tarefa</button>
+            <button onClick={copyTask}>Copiar Tarefa</button>
             <button onClick={removeTaks}>Excluir Tarefa</button>
             <button onClick={() => setEditModalState(true)}>Editar Tarefa</button>
             <label>Finalizar Tarefa:
@@ -68,8 +82,8 @@ const Card = ({
             id={id}
             editModalState={editModalState}
             setEditModalState={setEditModalState}
-
             />
+            {copied ? <div className='message'>Tarefa Copiada</div> : ""}
         </div>
     )
 }

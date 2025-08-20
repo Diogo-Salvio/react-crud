@@ -1,5 +1,5 @@
 //import { useState } from 'react'
-import { useEffect } from 'react'
+//import { useEffect } from 'react'
 import './editcardmodal.css'
 
 const EditCardModal = ({
@@ -23,14 +23,12 @@ const EditCardModal = ({
 
     if (tasks.find(task => task.key === id) !== undefined) {
         taskToEdit = tasks.find(task => task.key === id)
-    } else {
-        finishTaskToEdit = finishTasks.find(task => task.key === id)
     }
 
-    useEffect(() => {
-        console.log(tasks)
-        console.log(finishTasks)
-    },)
+    // useEffect(() => {
+    //     console.log(tasks)
+    //     console.log(finishTasks)
+    // },)
 
     const handleChange = (event) => {
         if (taskToEdit) {
@@ -55,7 +53,7 @@ const EditCardModal = ({
                     </div>
                     <p>Descrição</p>
                     <textarea name="description" cols="30" rows="10"  onChange={handleChange} value={taskDescription} ></textarea>
-                    <button  /*onClick={createCard}*/>Editar Tarefa</button>
+                    <button onClick={() => setEditModalState(false)}>Editar Tarefa</button>
                 </div>
             </div>
             : ""
