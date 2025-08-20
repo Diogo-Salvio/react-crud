@@ -1,13 +1,8 @@
 import './Containercard.css'
 import Card from '../card'
-import { useEffect } from 'react'
 
 const ContainerCards = ({ containerName, tasks, setTasks, finishTasks, setFinishTasks, arrayToBeRender }) => {
 
-    useEffect(() => {
-        console.log(tasks)
-        console.log(finishTasks)
-    }, [tasks, finishTasks])
 
     return (
         <div className='containerCards'>

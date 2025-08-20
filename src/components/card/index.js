@@ -1,16 +1,17 @@
+import EditCardModal from '../editcardmodal';
 import './card.css';
 import { useState } from 'react';
 //import { useEffect } from 'react';
 
-const Card = ({ 
-    taskTitle, 
-    taskDate, 
-    taskDescription, 
-    tasks, 
-    setTasks, 
-    finishTasks, 
-    setFinishTasks, 
-    id, 
+const Card = ({
+    taskTitle,
+    taskDate,
+    taskDescription,
+    tasks,
+    setTasks,
+    finishTasks,
+    setFinishTasks,
+    id,
     checkBoxState
 }) => {
 
@@ -19,11 +20,11 @@ const Card = ({
             const taskToMove = tasks.find(task => task.key === id)//Encontra a tarefa que precisa ser movida
             setTasks(prev => prev.filter(task => task.key !== id))//Remove a tarefa do state tasks
             setFinishTasks(prev => [...prev, taskToMove])//Adiciona a tarefa no state finishtasks
-         } else {
+        } else {
             const taskToMove = finishTasks.find(task => task.key === id)//Encontra a tarefa que precisa ser movida
             setFinishTasks(prev => prev.filter(task => task.key !== id))//Remove a tarefa do state finishTasks
             setTasks(prev => [...prev, taskToMove])//Adiciona a tarefa no state tasks
-        } 
+        }
     }
 
     const removeTaks = () => {
@@ -48,13 +49,27 @@ const Card = ({
             <p>{taskDescription}</p>
             <button>Copiar Tarefa</button>
             <button onClick={removeTaks}>Excluir Tarefa</button>
-            <button>Editar Tarefa</button>
+            <button onClick={() => setEditModalState(true)}>Editar Tarefa</button>
             <label>Finalizar Tarefa:
                 <input type='checkbox'
                     onChange={handleChange}
                     checked={checkBoxState}
                 />
             </label>
+
+            <EditCardModal
+            taskTitle={taskTitle}
+            taskDate={taskDate}
+            taskDescription={taskDescription}
+            tasks={tasks}
+            setTasks={setTasks}
+            finishTasks={finishTasks}
+            setFinishTasks={setFinishTasks}
+            id={id}
+            editModalState={editModalState}
+            setEditModalState={setEditModalState}
+
+            />
         </div>
     )
 }

@@ -39,6 +39,7 @@ function App() {
         setFinishTasks={setFinishTasks}
         arrayToBeRender={finishTasks}
       />
+
     </div>
   );
 }
