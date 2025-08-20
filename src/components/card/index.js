@@ -36,9 +36,7 @@ const Card = ({
     }
 
     //Função para copiar a task
-
     const [copied, setCopied] = useState(false);
-
     const copyTask = () => {
         const taskResume = `(${taskTitle}) para a data (${taskDate}) com a descrição ${taskDescription}`
         navigator.clipboard.writeText(taskResume)
@@ -49,11 +47,14 @@ const Card = ({
         }, 3000)
     }
 
-    //CARD DE EDIÇÃO DE TAREFA
-
+//CARD DE EDIÇÃO DE TAREFA
     const [editModalState, setEditModalState] = useState(false)
+//CARD DE EDIÇÃO DE TAREFA
 
-    //CARD DE EDIÇÃO DE TAREFA
+    const readImage = (event) => {
+        const image = event.target.files[0]
+        console.log(image)
+    }
 
     return (
         <div className='card'>
@@ -70,7 +71,7 @@ const Card = ({
                     checked={checkBoxState}
                 />
             </label>
-
+            <input type='file' id={id} accept="iamge/jpeg, image/png , image/jpg" onChange={readImage}></input>
             <EditCardModal
             taskTitle={taskTitle}
             taskDate={taskDate}
