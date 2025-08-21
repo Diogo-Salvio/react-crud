@@ -59,16 +59,19 @@ const Card = ({
 
     const readImage = (event) => { //Função para ler a Imagem
         const image = event.target.files[0]
+        const imageBase64Name = event.target.files[0].name
 
         if (image) {
             const reader = new FileReader();
 
             reader.onload = function (event) {
                 const imageBase64 = event.target.result
+                
+                console.log(event)
                 if (tasks.find(task => task.key === id) !== undefined) {
-                    setTasks(tasks.map(task => task.key === id ? { ...task, imgUrl: imageBase64 } : task))
+                    setTasks(tasks.map(task => task.key === id ? { ...task, imgUrl: imageBase64, imgName: imageBase64Name } : task))
                 } else {
-                    setFinishTasks(finishTasks.map(task => task.key === id ? { ...task, imgUrl: imageBase64 } : task))
+                    setFinishTasks(finishTasks.map(task => task.key === id ? { ...task, imgUrl: imageBase64, imgName: imageBase64Name  } : task))
                 }
                 setImgState(true)    
             }
@@ -80,13 +83,23 @@ const Card = ({
     const addImgSrc = () => {
         if (tasks.find(task => task.key === id) !== undefined) {
             const task = tasks.find(task => task.key === id)
-            console.log(task.imgUrl)
             return task.imgUrl || ''
         } else {
             const task = finishTasks.find(task => task.key === id)
             return task.imgUrl || ''
         }
     }
+
+    useEffect(() => {
+        const inTasks = tasks.find(task => task.key === id)
+        const inFinishTasks = finishTasks.find(task => task.key === id)
+
+        if (inTasks && inTasks.imgUrl) {
+            setImgState(true)
+        } else if (inFinishTasks && inFinishTasks.imgUrl) {
+            setImgState(true)
+        }
+    }, [tasks, finishTasks, id])
 
     return (
         <div className='card'>
