@@ -1,7 +1,7 @@
 import EditCardModal from '../editcardmodal';
 import './card.css';
 import { useState } from 'react';
-//import { useEffect } from 'react';
+import { useEffect } from 'react';
 
 const Card = ({
     taskTitle,
@@ -47,13 +47,45 @@ const Card = ({
         }, 3000)
     }
 
-//CARD DE EDIÇÃO DE TAREFA
+    //CARD DE EDIÇÃO DE TAREFA
     const [editModalState, setEditModalState] = useState(false)
-//CARD DE EDIÇÃO DE TAREFA
+    //CARD DE EDIÇÃO DE TAREFA
 
-    const readImage = (event) => {
+    //Input para adicionar uma imagem e visualizar a mesma.
+
+    const [imgModal, setImgModal] = useState(false)
+    const [imgState ,setImgState] = useState(false)
+
+
+    const readImage = (event) => { //Função para ler a Imagem
         const image = event.target.files[0]
-        console.log(image)
+
+        if (image) {
+            const reader = new FileReader();
+
+            reader.onload = function (event) {
+                const imageBase64 = event.target.result
+                if (tasks.find(task => task.key === id) !== undefined) {
+                    setTasks(tasks.map(task => task.key === id ? { ...task, imgUrl: imageBase64 } : task))
+                } else {
+                    setFinishTasks(finishTasks.map(task => task.key === id ? { ...task, imgUrl: imageBase64 } : task))
+                }
+                setImgState(true)    
+            }
+            
+            reader.readAsDataURL(image)
+        }
+    }
+
+    const addImgSrc = () => {
+        if (tasks.find(task => task.key === id) !== undefined) {
+            const task = tasks.find(task => task.key === id)
+            console.log(task.imgUrl)
+            return task.imgUrl || ''
+        } else {
+            const task = finishTasks.find(task => task.key === id)
+            return task.imgUrl || ''
+        }
     }
 
     return (
@@ -71,20 +103,31 @@ const Card = ({
                     checked={checkBoxState}
                 />
             </label>
-            <input type='file' id={id} accept="iamge/jpeg, image/png , image/jpg" onChange={readImage}></input>
+            <input type='file' id={id} accept="image/jpeg, image/png , image/jpg" onChange={readImage}></input>
+            {imgState ? <button onClick={() => setImgModal(true)}>Visualizar Imagem</button> : ""}
             <EditCardModal
-            taskTitle={taskTitle}
-            taskDate={taskDate}
-            taskDescription={taskDescription}
-            tasks={tasks}
-            setTasks={setTasks}
-            finishTasks={finishTasks}
-            setFinishTasks={setFinishTasks}
-            id={id}
-            editModalState={editModalState}
-            setEditModalState={setEditModalState}
+                taskTitle={taskTitle}
+                taskDate={taskDate}
+                taskDescription={taskDescription}
+                tasks={tasks}
+                setTasks={setTasks}
+                finishTasks={finishTasks}
+                setFinishTasks={setFinishTasks}
+                id={id}
+                editModalState={editModalState}
+                setEditModalState={setEditModalState}
             />
             {copied ? <div className='message'>Tarefa Copiada</div> : ""}
+            {imgModal && addImgSrc() ?
+                <div className='modalimg open' onClick={() => setImgModal(false)}>
+                    <div className='modalimg-inner' onClick={(event) => event.stopPropagation}>
+                        <img src={addImgSrc()}
+                            alt='upload-image' 
+                            className='img' 
+                        />
+                    </div>
+                </div>
+                : ""}
         </div>
     )
 }

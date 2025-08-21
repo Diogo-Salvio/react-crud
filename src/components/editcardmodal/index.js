@@ -25,11 +25,6 @@ const EditCardModal = ({
         taskToEdit = tasks.find(task => task.key === id)
     }
 
-    // useEffect(() => {
-    //     console.log(tasks)
-    //     console.log(finishTasks)
-    // },)
-
     const handleChange = (event) => {
         if (taskToEdit) {
             setTasks((prev) => prev.map((task) => task.key === id ? {...task, [event.target.name]: event.target.value} : task))

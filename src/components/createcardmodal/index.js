@@ -1,4 +1,3 @@
-//import { useEffect } from 'react'
 import './createcard.css'
 
 
@@ -11,9 +10,6 @@ const CreateCardModal = ({
     setTasks
 }) => {
 
-    // useEffect(() => {
-    //     console.log(card)
-    // })
 
 
     const handleChange = (event) => {
