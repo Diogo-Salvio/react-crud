@@ -19,7 +19,7 @@ const ContainerCards = ({ containerName, tasks, setTasks, finishTasks, setFinish
                         finishTasks={finishTasks}
                         setFinishTasks={setFinishTasks}
                         id={task.key}
-                        checkBoxState={arrayToBeRender === tasks ? false : true}
+                        checkBoxState={tasks.find(item => item.key === task.key) ? false : true}
                     />
                 ) : ""}
             </div>

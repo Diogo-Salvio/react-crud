@@ -67,7 +67,6 @@ const Card = ({
             reader.onload = function (event) {
                 const imageBase64 = event.target.result
                 
-                console.log(event)
                 if (tasks.find(task => task.key === id) !== undefined) {
                     setTasks(tasks.map(task => task.key === id ? { ...task, imgUrl: imageBase64, imgName: imageBase64Name } : task))
                 } else {
