@@ -1,6 +1,5 @@
 import './createcard.css'
 
-
 const CreateCardModal = ({
     modalState,
     setModalState,
@@ -10,21 +9,17 @@ const CreateCardModal = ({
     setTasks
 }) => {
 
-
-
-    const handleChange = (event) => {
+    const handleChange = (event) => { //Armazena o valor da nova tarefa no State Card
         setCard({ ...card, [event.target.name]: event.target.value })
     }
 
     const createCard = () => {
-
+        //Verificações dos dados
         const cardKeys = Object.values(card)
-        
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         const taskdate = new Date(cardKeys[1]);
         taskdate.setHours(0, 0, 0, 0);
-
 
         if (!cardKeys[0].trim()) {
             alert('A tarefa precisa de um titulo!')

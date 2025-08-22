@@ -1,5 +1,3 @@
-//import { useState } from 'react'
-//import { useEffect } from 'react'
 import './editcardmodal.css'
 
 const EditCardModal = ({
@@ -15,8 +13,6 @@ const EditCardModal = ({
     setEditModalState
 }) => {
 
-
-
     //Condicional para descobrir em qual state está a tarefa que foi clicada
     let taskToEdit
     let finishTaskToEdit
@@ -28,7 +24,7 @@ const EditCardModal = ({
         finishTaskToEdit = finishTasks.find(task => task.key === id)
     }
 
-    const handleChange = (event) => {
+    const handleChange = (event) => {//Função para armazenar as mudanças feitas ao editar a tarefa
         if (taskToEdit) {
             setTasks((prev) => prev.map((task) => task.key === id ? { ...task, [event.target.name]: event.target.value } : task))
         } else {
@@ -36,9 +32,7 @@ const EditCardModal = ({
         }
     }
 
-    const checkChange = () => {
-
-
+    const checkChange = () => {//Verificação das mudanças feitas
 
         if (taskToEdit) {
             const taskKeys = Object.values(taskToEdit)// Objeto para a tarafa em Tasks

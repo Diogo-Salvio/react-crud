@@ -100,7 +100,7 @@ const Card = ({
         }
     }, [tasks, finishTasks, id])
 
-    let imgNameSpan
+    let imgNameSpan //Atribui o imgName no span que vai ser renderizado
     if (tasks.find(task => task.key === id) !== undefined) {
         imgNameSpan = tasks.find(task => task.key === id)
     } else if (finishTasks.find(task => task.key === id) !== undefined) {
