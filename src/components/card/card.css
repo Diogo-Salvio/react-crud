@@ -117,3 +117,21 @@
     gap: 10px;
     background-color: white;
 }
+
+.inputTypeFile {
+    display: none;
+
+}
+
+.labelForInput {
+    background-color:rgb(199, 199, 199);
+    padding: 8px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+    text-align: center;
+}
+
+.labelForInput:hover {
+    background-color: white;
+}

@@ -54,7 +54,7 @@ const Card = ({
     //Input para adicionar uma imagem e visualizar a mesma.
 
     const [imgModal, setImgModal] = useState(false)
-    const [imgState ,setImgState] = useState(false)
+    const [imgState, setImgState] = useState(false)
 
 
     const readImage = (event) => { //Função para ler a Imagem
@@ -66,20 +66,20 @@ const Card = ({
 
             reader.onload = function (event) {
                 const imageBase64 = event.target.result
-                
+
                 if (tasks.find(task => task.key === id) !== undefined) {
                     setTasks(tasks.map(task => task.key === id ? { ...task, imgUrl: imageBase64, imgName: imageBase64Name } : task))
                 } else {
-                    setFinishTasks(finishTasks.map(task => task.key === id ? { ...task, imgUrl: imageBase64, imgName: imageBase64Name  } : task))
+                    setFinishTasks(finishTasks.map(task => task.key === id ? { ...task, imgUrl: imageBase64, imgName: imageBase64Name } : task))
                 }
-                setImgState(true)    
+                setImgState(true)
             }
-            
+
             reader.readAsDataURL(image)
         }
     }
 
-    const addImgSrc = () => {
+    const addImgSrc = () => {//Função para encontrar adicionar o src da imagem
         if (tasks.find(task => task.key === id) !== undefined) {
             const task = tasks.find(task => task.key === id)
             return task.imgUrl || ''
@@ -89,7 +89,7 @@ const Card = ({
         }
     }
 
-    useEffect(() => {
+    useEffect(() => {//Função que habilita o botão de 'Visualizar imagem' após a mundança de state 
         const inTasks = tasks.find(task => task.key === id)
         const inFinishTasks = finishTasks.find(task => task.key === id)
 
@@ -99,6 +99,18 @@ const Card = ({
             setImgState(true)
         }
     }, [tasks, finishTasks, id])
+
+    let imgNameSpan
+    if (tasks.find(task => task.key === id) !== undefined) {
+        imgNameSpan = tasks.find(task => task.key === id)
+    } else if (finishTasks.find(task => task.key === id) !== undefined) {
+        imgNameSpan = finishTasks.find(task => task.key === id)
+    }
+
+    useEffect(() => {
+        console.log(tasks)
+        console.log(finishTasks)
+    }, [tasks, finishTasks])
 
     return (
         <div className='card'>
@@ -115,7 +127,13 @@ const Card = ({
                     checked={checkBoxState}
                 />
             </label>
-            <input type='file' id={id} accept="image/jpeg, image/png , image/jpg" onChange={readImage}></input>
+            <label className='labelForInput'>
+                Selecionar Imagem
+                <input className='inputTypeFile' type='file' id={id} accept="image/jpeg, image/png , image/jpg" onChange={readImage}></input>
+            </label>
+            {imgState ?
+                <span>{imgNameSpan.imgName}</span>
+                : ""}
             {imgState ? <button onClick={() => setImgModal(true)}>Visualizar Imagem</button> : ""}
             <EditCardModal
                 taskTitle={taskTitle}
@@ -134,12 +152,14 @@ const Card = ({
                 <div className='modalimg open' onClick={() => setImgModal(false)}>
                     <div className='modalimg-inner' onClick={(event) => event.stopPropagation}>
                         <img src={addImgSrc()}
-                            alt='upload-image' 
-                            className='img' 
+                            alt='upload-image'
+                            className='img'
                         />
                     </div>
                 </div>
                 : ""}
+
+
         </div>
     )
 }
