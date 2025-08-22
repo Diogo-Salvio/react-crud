@@ -19,7 +19,7 @@ const CreateCardModal = ({
     const createCard = () => {
 
         const cardKeys = Object.values(card)
-
+        
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         const taskdate = new Date(cardKeys[1]);

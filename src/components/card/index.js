@@ -107,11 +107,6 @@ const Card = ({
         imgNameSpan = finishTasks.find(task => task.key === id)
     }
 
-    useEffect(() => {
-        console.log(tasks)
-        console.log(finishTasks)
-    }, [tasks, finishTasks])
-
     return (
         <div className='card'>
             <h3>{taskTitle}</h3>
